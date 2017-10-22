@@ -19,19 +19,19 @@ typedef struct
 } Stack;
 
 //栈的初始化
-Status init_stack(Stack *s);
+Status initStack(Stack *s);
 
 //销毁栈
-Status destroy_stack(Stack *s);
+Status destroyStack(Stack *s);
 
 //判断是否为空栈
-Status is_empty(Stack *s);
+Status isEmpty(Stack *s);
 
 //获取栈的长度
-int stack_length(Stack *s);
+int stackLength(Stack *s);
 
 //获取栈顶指针，空栈返回error
-Status get_top(Stack *s, SElemTpye *e);
+Status getTop(Stack *s, SElemTpye *e);
 
 //入栈
 Status push(Stack *s, SElemTpye e);
@@ -40,7 +40,7 @@ Status push(Stack *s, SElemTpye e);
 Status pop(Stack *s, SElemTpye *e);
 
 //遍历
-Status stack_traverse(Stack *s, void (* visit)(SElemTpye *e));
+Status stackTraverse(Stack *s, void (* visit)(SElemTpye *e));
 
-void print_data(SElemTpye *e); //print
+void printData(SElemTpye *e); //print
 #endif //_STACK_H

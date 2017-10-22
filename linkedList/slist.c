@@ -4,7 +4,7 @@
 #include "slist.h"
 
 //创建节点
-Node* make_node(const int data)
+Node* makeNode(const int data)
 {
     Node * p = (Node *)malloc(sizeof(Node));
     assert(p != NULL);
@@ -14,24 +14,24 @@ Node* make_node(const int data)
 }
 
 //销毁节点
-void destroy_node(Node* node)
+void destroyNode(Node* node)
 {
     free((Node *) node);
 }
 
 //带头节点的单链表
-void s_init(Slist * list)
+void sInit(Slist * list)
 {
-    list->head = make_node(INI_MIN);
+    list->head = makeNode(INI_MIN);
 }
 
 //按顺序插入
-bool s_insert(Slist * list, const int data)
+bool sInsert(Slist * list, const int data)
 {
     Node * ptem = list->head;
     Node* current;
     Node * node;
-    node = make_node(data);
+    node = makeNode(data);
     if(ptem->data > data)
     {
         list->head = node;
@@ -45,7 +45,7 @@ bool s_insert(Slist * list, const int data)
 }
 
 //移除节点
-bool s_remove(Slist * list, const int key)
+bool sRemove(Slist * list, const int key)
 {
     Node* previous = list->head;
     Node* current;
@@ -60,17 +60,17 @@ bool s_remove(Slist * list, const int key)
 }
 
 //修改,先删后插入，因为这是有序链表
-bool s_modify(Slist * list, const int key, const int data)
+bool sModify(Slist * list, const int key, const int data)
 {
-    if( s_remove(list, key) )
-        s_insert(list, data);
+    if( sRemove(list, key) )
+        sInsert(list, data);
     else
         return false;
     return true;
 }
 
 //找到返回关键字的节点，否则返回null指针
-Node* s_find(Slist * list, const int key)
+Node* sFind(Slist * list, const int key)
 {
     Node * current = list->head;
     while ( (current = current->next) != NULL && current->data != key)
@@ -80,7 +80,7 @@ Node* s_find(Slist * list, const int key)
 }
 
 //遍历
-void s_treaverse( Slist * slist, void (*func) (Node* p) )
+void sTreaverse( Slist * slist, void (*func) (Node* p) )
 {
     Node * current = slist->head;
     func(current);
@@ -89,14 +89,14 @@ void s_treaverse( Slist * slist, void (*func) (Node* p) )
 }
 
 //销毁节点
-void s_destrory(Slist * list)
+void sDestrory(Slist * list)
 {
-    s_treaverse(list, destroy_node);
+    sTreaverse(list, destroyNode);
     free(list->head);
 }
 
 //print
-void print_data(Node * p)
+void printData(Node * p)
 {
     printf("%d ", p->data);
 }

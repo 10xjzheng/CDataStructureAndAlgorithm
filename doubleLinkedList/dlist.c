@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "dlist.h"
 //创建节点
-Node* make_node(const int data)
+Node* makeNode(const int data)
 {
     Node * p = (Node *)malloc(sizeof(Node));
     if( p == NULL )
@@ -17,24 +17,24 @@ Node* make_node(const int data)
 }
 
 //销毁节点
-void destroy_node(Node* node)
+void destroyNode(Node* node)
 {
     free((Node *) node);
 }
 
 //带头节点的单链表
-void d_init(Dlist * list)
+void dInit(Dlist * list)
 {
-    list->head = make_node(INI_MIN);
+    list->head = makeNode(INI_MIN);
 }
 
 //按顺序插入
-bool d_insert(Dlist * list, const int data)
+bool dInsert(Dlist * list, const int data)
 {
     Node * ptem = list->head;
     Node* current;
     Node * node;
-    node = make_node(data);
+    node = makeNode(data);
     if(ptem->data > data)
     {
         list->head = node;
@@ -57,7 +57,7 @@ bool d_insert(Dlist * list, const int data)
 
 
 //移除节点
-bool d_remove(Dlist * list, const int key)
+bool dRemove(Dlist * list, const int key)
 {
     Node* previous = list->head;
     Node* current;
@@ -86,17 +86,17 @@ bool d_remove(Dlist * list, const int key)
 }
 
 //修改,先删后插入，因为这是有序链表
-bool d_modify(Dlist * list, const int key, const int data)
+bool dModify(Dlist * list, const int key, const int data)
 {
-    if( d_remove(list, key) )
-        d_insert(list, data);
+    if( dRemove(list, key) )
+        dInsert(list, data);
     else
         return false;
     return true;
 }
 
 //找到返回关键字的节点，否则返回null指针
-Node* d_find(Dlist * list, const int key)
+Node* dFind(Dlist * list, const int key)
 {
     Node * current = list->head;
     while ( (current = current->next) != NULL && current->data != key)
@@ -106,7 +106,7 @@ Node* d_find(Dlist * list, const int key)
 }
 
 //遍历
-void d_treaverse(Dlist * dlist, void (*func) (Node* p))
+void dTreaverse(Dlist * dlist, void (*func) (Node* p))
 {
     Node * current = dlist->head;
     func(current);
@@ -115,14 +115,14 @@ void d_treaverse(Dlist * dlist, void (*func) (Node* p))
 }
 
 //销毁节点
-void d_destrory(Dlist * list)
+void dDestrory(Dlist * list)
 {
-    d_treaverse(list, destroy_node);
+    dTreaverse(list, destroyNode);
     free(list->head);
 }
 
 //print
-void print_data(Node * p)
+void printData(Node * p)
 {
     printf("%d ", p->data);
 }

@@ -9,17 +9,17 @@ int main(int argc, char const *argv[])
 {
     Slist nlist;
     int num;
-    s_init(&nlist); //初始化
+    sInit(&nlist); //初始化
     for(num = 1; num < 10; num++)
     {
-        s_insert(&nlist, num);  //插入
+        sInsert(&nlist, num);  //插入
     }
-    s_treaverse(&nlist, print_data);//遍历打印data
-    s_remove(&nlist, 3); //移除
+    sTreaverse(&nlist, printData);//遍历打印data
+    sRemove(&nlist, 3); //移除
     printf("\n");
-    s_treaverse(&nlist, print_data);
-    s_modify(&nlist, 8, 44);//修改
+    sTreaverse(&nlist, printData);
+    sModify(&nlist, 8, 44);//修改
     printf("\n");
-    s_treaverse(&nlist, print_data);
+    sTreaverse(&nlist, printData);
     return 0;
 }

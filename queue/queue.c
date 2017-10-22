@@ -1,24 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "stack.h"
+#include "queue.h"
 
-Status initStack(Stack *stack)
+Status init_queue(Queue *queue)
 {
-    stack->base = (SElemTpye *) malloc(sizeof(SElemTpye) * STACK_INIT_SIZE);
-    if(!stack->base) exit(ERROR);
-    stack->top = stack->base;
-    stack->size = STACK_INIT_SIZE;
+    queue->base = (SElemTpye *) malloc(sizeof(SElemTpye) * STACK_INIT_SIZE);
+    if(!queue->base) exit(ERROR);
+    queue->top = queue->base;
+    queue->size = STACK_INIT_SIZE;
     return OK;
 }
 
-Status getTop(Stack *s, SElemTpye *e)
+Status get_top(Queue *s, SElemTpye *e)
 {
     if(s->top == s->base) return ERROR;
     e = (s->top - 1);
     return OK;
 }
 
-Status push(Stack *s, SElemTpye e)
+Status push(Queue *s, SElemTpye e)
 {
     if(s->top - s->base >= s->size)
     {
@@ -31,30 +31,30 @@ Status push(Stack *s, SElemTpye e)
     return OK;
 }
 
-Status pop(Stack *s, SElemTpye *e)
+Status pop(Queue *s, SElemTpye *e)
 {
     if(s->top == s->base) return ERROR;
     *e = * --s->top;
     return OK;
 }
 
-Status destroyStack(Stack *s)
+Status destroy_queue(Queue *s)
 {
-    free((Stack *)s);
+    free((Queue *)s);
 }
 
-Status isEmpty(Stack *s)
+Status is_empty(Queue *s)
 {
     return s->top == s->base;
 }
 
-int stackLength(Stack *s)
+int queue_length(Queue *s)
 {
     if(s->top == s->base) return ERROR;
     return s->size;
 }
 
-Status stackTraverse(Stack *s, void (* visit)(SElemTpye *e))
+Status queue_traverse(Queue *s, void (* visit)(SElemTpye *e))
 {
     SElemTpye *e;
     e = s->top;
@@ -63,7 +63,7 @@ Status stackTraverse(Stack *s, void (* visit)(SElemTpye *e))
     return OK;
 }
 
-void printData(SElemTpye *e)
+void print_data(SElemTpye *e)
 {
     printf("%d ", *e);
 }
