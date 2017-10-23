@@ -1,9 +1,9 @@
 #ifndef _QUEUE_H
 #define _QUEUE_H
 
-#define OK 0
-#define NOPE 1
-#define ERROR 1
+#define OK 1
+#define NOPE 0
+#define ERROR 0
 #define OVERFLOW -2
 
 typedef int QElemType; //元素类型

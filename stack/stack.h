@@ -1,8 +1,8 @@
 #ifndef _STACK_H
 #define _STACK_H
 
-#define OK 0
-#define ERROR 1
+#define OK 1
+#define ERROR 0
 #define OVERFLOW -2
 
 #define STACK_INIT_SIZE 10 //存储空间的初始化分配
