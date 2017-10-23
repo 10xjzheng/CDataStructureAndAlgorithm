@@ -1,69 +1,89 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
-
-Status init_queue(Queue *queue)
+//队列的初始化
+Status initQueue(LinkQueue *q)
 {
-    queue->base = (SElemTpye *) malloc(sizeof(SElemTpye) * STACK_INIT_SIZE);
-    if(!queue->base) exit(ERROR);
-    queue->top = queue->base;
-    queue->size = STACK_INIT_SIZE;
+    q->front = q->rear = (QueuePtr) malloc(sizeof(QNode));
+    if(!q->front) exit(OVERFLOW);
+    q->front->next = NULL;
     return OK;
 }
 
-Status get_top(Queue *s, SElemTpye *e)
+//销毁队列
+Status destroyQueue(LinkQueue *q)
 {
-    if(s->top == s->base) return ERROR;
-    e = (s->top - 1);
-    return OK;
-}
-
-Status push(Queue *s, SElemTpye e)
-{
-    if(s->top - s->base >= s->size)
+    while(q->front)
     {
-        s->base = (SElemTpye *) realloc( s->base, (s->size + STACK_INCREMENT) * sizeof(SElemTpye));
-        if(!s->base) exit(ERROR);
-        s->top = s->base + s->size;
-        s->size += STACK_INCREMENT;
+        q->rear = q->front->next;
+        free(q->front);
+        q->front = q->rear;
     }
-    *s->top++ = e;
     return OK;
 }
 
-Status pop(Queue *s, SElemTpye *e)
+//判断是否为空队列
+Status isEmpty(LinkQueue *q)
 {
-    if(s->top == s->base) return ERROR;
-    *e = * --s->top;
+    if(q->front == q->rear) return OK;
+    else return NOPE;
+}
+
+//获取队列的长度
+int queueLength(LinkQueue q)
+{
+    return 0;
+}
+
+//获取队头指针
+Status getHead(LinkQueue *q, QElemType *e)
+{
+    return OK;
+}   
+
+//插入
+Status in(LinkQueue *q, QElemType e)
+{
+    QueuePtr p = (QueuePtr) malloc(sizeof(QNode));
+    if(!p) exit(OVERFLOW);
+    p->data = e;
+    p->next = NULL;
+    q->rear->next = p;
+    q->rear = p;
     return OK;
 }
 
-Status destroy_queue(Queue *s)
+//出队列，并返回队头元素到*e
+Status out(LinkQueue *q, QElemType *e)
 {
-    free((Queue *)s);
-}
-
-Status is_empty(Queue *s)
-{
-    return s->top == s->base;
-}
-
-int queue_length(Queue *s)
-{
-    if(s->top == s->base) return ERROR;
-    return s->size;
-}
-
-Status queue_traverse(Queue *s, void (* visit)(SElemTpye *e))
-{
-    SElemTpye *e;
-    e = s->top;
-    while(e != s->base)
-        visit(-- e);
+    if(q->front == q->rear) return ERROR;
+    QueuePtr p = (QueuePtr) malloc(sizeof(QNode));
+    if(!p) exit(OVERFLOW);
+    p = q->front->next;
+    *e = p->data;
+    q->front->next = p->next;
+    if(q->rear == p) q->rear = q->front;
+    free(p);
     return OK;
 }
 
-void print_data(SElemTpye *e)
+//遍历
+Status queueTraverse(LinkQueue *q, void (* visit)(QElemType e))
 {
-    printf("%d ", *e);
+    if(q->front == q->rear) return ERROR;
+    QueuePtr p = (QueuePtr) malloc(sizeof(QNode));
+    if(!p) exit(OVERFLOW);
+    p = q->front->next;
+    while(1)
+    {
+        visit(p->data);
+        if(p == q->rear) break;
+        p = p->next;
+    }
+    return OK;
+}
+
+void printData(QElemType e)
+{
+    printf("%d ", e);
 }

@@ -7,23 +7,24 @@
  */
 int main(int argc, char const *argv[])
 {
-    Stack s;
-    SElemTpye e;
-    int i;
-    init_queue(&s);
-    for (i = 1; i < 5; ++i)
+    LinkQueue q;
+    int i = 0;
+    QElemType e;
+    if(initQueue(&q) != OK) return ERROR;
+    //进队列
+    for (i = 0; i < 10; ++i)
     {
-        scanf("%d", &e);
-        if(push(&s, e) == OK)
-            printf("push %d success\n", e);
+        if(in(&q, i) == OK)
+            printf("in %d success\n", i);
     }
-    printf("traverse this queue:", e);
-    queue_traverse(&s, print_data);
-    printf("\n", e);
-    for (i = 1; i < 5; ++i)
+    //遍历打印
+    printf("Traverse queue:\n");
+    queueTraverse(&q, printData);
+    printf("\n");
+    //出队列
+    for (i = 0; i < 10; ++i)
     {
-        if(pop(&s, &e) == OK)
-            printf("pop %d success\n", e);
+        out(&q, &e);
+        printf("out: %d success \n", e);
     }
-    destroy_queue(&s);
 }
