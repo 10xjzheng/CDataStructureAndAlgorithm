@@ -15,7 +15,7 @@ typedef struct BitTNode {
 Status createBitTree(BitTree t);
 
 //搜索数据所在节点 
-BitTNode* searchNode(BitTree t, TElemType e);
+Status searchNode(BitTree t, TElemType e);
 
 //插入数据
 Status insertNode(BitTree t, TElemType e);
