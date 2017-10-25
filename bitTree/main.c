@@ -8,12 +8,12 @@
 int main(int argc, char const *argv[])
 {
     int i;
-    BitTree t = NULL;
-    initBitTree(t);
+    BitTNode t;
+    initBitTree(&t);
     for (i = 0; i < 10; ++i)
     {
-        if(insertNode(t, i) == OK)
+        if(insertNode(&t, i) == OK)
             printf("in %d success\n", i);
     }
-  
+    return 0;
 }

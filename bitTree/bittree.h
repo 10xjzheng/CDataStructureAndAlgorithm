@@ -6,30 +6,30 @@
 typedef int TElemType;//元素类型
 typedef int Status; //状态
 
-typedef struct BitTNode {
+typedef struct bitTNode {
     TElemType data;
-    struct BitTNode *lChild, *rChild;
-} BitTNode, *BitTree;
+    struct bitTNode *lChild, *rChild;
+} BitTNode;
 
 //创建一个有根树
-Status createBitTree(BitTree t);
+Status initBitTree(BitTNode *t);
 
 //搜索数据所在节点 
-Status searchNode(BitTree t, TElemType e);
+Status searchNode(BitTNode* t, TElemType e);
 
 //插入数据
-Status insertNode(BitTree t, TElemType e);
+Status insertNode(BitTNode* t, TElemType e);
 
 //先序遍历
-Status preOrderTraverse(BitTree t, void (*visit)(TElemType e));
+Status preOrderTraverse(BitTNode* t, void (*visit)(TElemType e));
 
 //中序遍历
-Status inOrderTraverse(BitTree t, void (*visit)(TElemType e));
+Status inOrderTraverse(BitTNode* t, void (*visit)(TElemType e));
 
 //后序遍历
-Status postOrderTraverse(BitTree t, void (*visit)(TElemType e));
+Status postOrderTraverse(BitTNode* t, void (*visit)(TElemType e));
 
 //层序遍历
-Status levelOrderTraverse(BitTree t, void (*visit)(TElemType e));
+Status levelOrderTraverse(BitTNode* t, void (*visit)(TElemType e));
 
 #endif //_BITTREE_H
