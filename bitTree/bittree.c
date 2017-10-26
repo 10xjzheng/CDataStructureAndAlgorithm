@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include "bittree.h"
 
+BitTNode* makeNode(TElemType e)
+{
+    BitTNode* temp = (BitTNode*)malloc(sizeof(BitTNode));
+    temp->lChild = temp->rChild = NULL;
+    temp->data = e;
+    return temp;
+}
+
 //树的初始化
 Status initBitTree(BitTNode *t)
 {
@@ -20,17 +28,24 @@ Status searchNode(BitTNode* t, TElemType e)
 //插入数据
 Status insertNode(BitTNode* t, TElemType e)
 {
-    if(t == NULL) {
-        BitTNode* temp = (BitTNode*)malloc(sizeof(BitTNode));
-        temp.lChild = temp.rChild = NULL;
-        t = temp;
-        return OK;   
+    if(t== NULL) {
+        return ERROR;   
     }
     if(e < (t->data))
     {
-        insertNode(t->lChild, e);
+        if(t->lChild == NULL) {       
+            t->lChild = makeNode(e);
+            return OK;
+        } else {
+            insertNode(t->lChild, e);
+        }
     } else {
-        insertNode(t->rChild, e);
+        if(t->rChild == NULL) {
+            t->rChild = makeNode(e);
+            return OK;
+        } else {
+            insertNode(t->rChild, e);
+        }
     }
     return OK;
 }

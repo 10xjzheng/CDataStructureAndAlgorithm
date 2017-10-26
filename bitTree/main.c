@@ -10,10 +10,11 @@ int main(int argc, char const *argv[])
     int i;
     BitTNode t;
     initBitTree(&t);
-    for (i = 0; i < 10; ++i)
+    for (i = 1; i < 10; ++i)
     {
         if(insertNode(&t, i) == OK)
             printf("in %d success\n", i);
     }
+    printf("out %d\n", t.rChild->rChild->data);
     return 0;
 }

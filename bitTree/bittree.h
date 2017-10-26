@@ -11,6 +11,7 @@ typedef struct bitTNode {
     struct bitTNode *lChild, *rChild;
 } BitTNode;
 
+BitTNode* makeNode(TElemType e);
 //创建一个有根树
 Status initBitTree(BitTNode *t);
 
