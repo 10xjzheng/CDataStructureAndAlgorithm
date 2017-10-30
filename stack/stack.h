@@ -34,7 +34,7 @@ int stackLength(Stack *s);
 Status getTop(Stack *s, SElemTpye *e);
 
 //入栈
-Status push(Stack *s, SElemTpye e);
+Status push(Stack *s, SElemTpye *e);
 
 //出栈
 Status pop(Stack *s, SElemTpye *e);
