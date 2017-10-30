@@ -71,9 +71,10 @@ Status searchNode(BitTNode* t, TElemType e, BitTNode *res)
 {
     if(t == NULL) return ERROR;
     Stack s;
+    BitTNode* p = t;
+    BitTNode tmp;
     initStack(&s);
     push(&s, *t);
-    BitTNode* p = t;
     while(!isEmpty(&s) || p)
     {
         while(p)
@@ -84,13 +85,13 @@ Status searchNode(BitTNode* t, TElemType e, BitTNode *res)
 
         if(!isEmpty(&s))
         {
-            printf("res:%d\n", *(s.top--));
-            /*pop(&s, p);
-            printf("res:%d\n", p->data);
-            p = p->rChild;*/
+            pop(&s, &tmp);
+            if(tmp.data == e) {
+                *res = tmp;
+                return OK;
+            }
+            p = tmp.rChild;
         }
-
-
     }
     return ERROR;
 }
