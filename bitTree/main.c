@@ -7,7 +7,7 @@
  */
 int main(int argc, char const *argv[])
 {
-    int i;
+    int i,num;
     int arr[10] = {3,5,12,23,56,31,43,35,63,14};
     BitTNode t;
     BitTNode res;
@@ -23,9 +23,12 @@ int main(int argc, char const *argv[])
     inOrderTraverse(&t, printData);
     printf("\nPost Order:\n");
     postOrderTraverse(&t, printData);
-
-    if(searchNode(&t, 23, &res) == OK) {
+    printf("\ninput the number you want to find:");
+    scanf("%d", &num);
+    if(searchNode(&t, num, &res) == OK) {
         printf("\nresult: %d\n", res.data);
-    }
+    } else {
+        printf("can't find num");
+    } 
     return 0;
 }
