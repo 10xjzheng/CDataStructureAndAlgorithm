@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "sort.h"
 
-//插入排序
-void insertSort(int *arr, int length)
+//插入排序--倒序
+void insertSort(int arr[], int length)
 {
     int j, i, tmp;
     if(length == 0) {
@@ -10,14 +10,14 @@ void insertSort(int *arr, int length)
     }
     for (i = 1; i < length; i++)
     {
-        tmp = *(arr+i);
+        tmp = arr[i];
         j = i-1;
-        while(tmp < *(arr+j) && j >= 0)
+        while(tmp > arr[j] && j >= 0)
         {
-            *(arr + j + 1) = *(arr + j);
+            arr[j + 1] = arr[j];
             j--;  
         }
-        *(arr + j + 1) = tmp;
+        arr[j + 1] = tmp;
     }
     printData(arr, length, "insert sort:");
 }
@@ -33,49 +33,43 @@ void printData(int *arr, int length, char *s)
     }
 }
 
-//合并数组
-void merge(int *arr, int p, int q, int r)
+//归并排序
+void merge(int arr[], int start, int mid, int end)
 {
-    int n1, n2, n, a, b, i;
-    n1 = q - p + 1; 
-    n2 = r - q;
+    int n1 = (mid - start) + 1;
+    int n2 = (end - mid);
     int arr1[n1], arr2[n2];
+    int i,j,n;
     for (i = 0; i < n1; ++i)
+        arr1[i] = arr[start + i];
+    for (j = 0; j < n2; ++j)
+        arr2[j] = arr[j + mid +1];
+    i = j = 0;
+    n = start;
+    while(i < n1 && j < n2)  
     {
-        arr1[i] = *(arr + p + i);
-    }
-    for (i = 0; i < n2; ++i)
-    {
-        arr2[i] = *(arr + q + 1 + i);
-    }
-    a = b = n = 0;
-    while (a < n1 && b < n2)
-    {
-        if(arr1[a] < arr2[b])
-        {
-            *(arr + n) = arr1[a];
-            a++;
-        } else {
-            *(arr + n) = arr2[b];
-            b++;
-        }
+        if(arr1[i] < arr2[j])
+            arr[n] = arr1[i++];
+        else 
+            arr[n] = arr2[j++];
         n++;
     }
-    while(n < r+1 && a < n1) {
-        *(arr + n) = arr1[a++];
-        n++;
-    }
-    while(n < r+1 && b < n2) {
-        *(arr + n) = arr2[b++];
-        n++;
-    }
+    while(i < n1)
+        arr[n++] = arr1[i++];
+    while(j < n2)
+        arr[n++] = arr2[j++];
 }
 
-void mergeSort(int *arr, int p, int r)
+/**
+ * 归并排序法
+ */
+void mergeSort(int arr[], int start, int end)
 {
-    int q;
-    if(p < r) q = (r-p)/2;
-    mergeSort(arr, p, q);
-    mergeSort(arr, p+1, r);
-    merge(arr, p, q, r);
+    int mid;
+    if(start < end) {
+        mid = (start + end) / 2;
+        mergeSort(arr, start, mid);
+        mergeSort(arr, mid+1, end);
+        merge(arr, start, mid, end);
+    }
 }
