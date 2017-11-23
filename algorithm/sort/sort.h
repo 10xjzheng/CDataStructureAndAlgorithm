@@ -5,9 +5,16 @@ void insertSort(int arr[], int length);
 
 //归并排序
 void mergeSort(int arr[], int start, int end);
+//合并数组
+void merge(int arr[], int start, int mid, int end);
+
+//快速排序
+void quickSort(int arr[], int start, int end);
+//快速排序切分
+int partition(int arr[], int start, int end);
 
 //打印数组数据
 void printData(int *arr, int length, char *s);
 
-void merge(int arr[], int start, int mid, int end);
 #endif //_SORT_H
+

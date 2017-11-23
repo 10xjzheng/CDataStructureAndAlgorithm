@@ -19,7 +19,6 @@ void insertSort(int arr[], int length)
         }
         arr[j + 1] = tmp;
     }
-    printData(arr, length, "insert sort:");
 }
 
 //打印数组数据
@@ -33,7 +32,7 @@ void printData(int *arr, int length, char *s)
     }
 }
 
-//归并排序
+//归并排序--合并数组
 void merge(int arr[], int start, int mid, int end)
 {
     int n1 = (mid - start) + 1;
@@ -72,4 +71,40 @@ void mergeSort(int arr[], int start, int end)
         mergeSort(arr, mid+1, end);
         merge(arr, start, mid, end);
     }
+}
+
+/**
+ * 快速排序
+ */
+void quickSort(int arr[], int start, int end)
+{
+    if(start< end) {
+        int mid;
+        mid = partition(arr, start, end);
+        quickSort(arr, start, mid - 1);
+        quickSort(arr, mid + 1, end);
+    }
+}
+
+/**
+ * 快速排序切分
+ */
+int partition(int arr[], int start, int end)
+{
+    int measure = arr[end];
+    int tmp, j, lowNumPointer = start - 1;
+    for(j = start; j < end; j++)
+    {
+        if(arr[j] >= measure)
+        {
+            lowNumPointer = lowNumPointer+1;
+            tmp = arr[j];
+            arr[j] = arr[lowNumPointer];
+            arr[lowNumPointer] = tmp;
+        }
+    }
+    tmp = arr[end];
+    arr[end] = arr[lowNumPointer + 1];
+    arr[lowNumPointer + 1] = tmp;
+    return lowNumPointer + 1;
 }
