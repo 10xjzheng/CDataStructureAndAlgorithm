@@ -5,6 +5,9 @@ int main()
 {
     int arr[LEN] = {86,2,34,65,32,12,23,87,14,91};
     printData(arr, LEN, "original array:");
+    //冒泡排序--升序
+    bubbleSort(arr, LEN);
+    printData(arr, LEN, "insert sort:");
     //插入排序--降序
     insertSort(arr, LEN);
     printData(arr, LEN, "insert sort:");

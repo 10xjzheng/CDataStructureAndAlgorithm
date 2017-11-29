@@ -13,6 +13,9 @@ void quickSort(int arr[], int start, int end);
 //快速排序切分
 int partition(int arr[], int start, int end);
 
+//冒泡排序
+void bubbleSort(int arr[], int length);
+
 //打印数组数据
 void printData(int *arr, int length, char *s);
 
