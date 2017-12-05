@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "sort.h"
-#define LEN 10
+#define LEN 5
 int main()
 {
-    int arr[LEN] = {86,2,34,65,32,12,23,87,14,91};
+    int arr[LEN] = {4,2,3,4,5};
     printData(arr, LEN, "original array:");
     //冒泡排序--升序
     bubbleSort(arr, LEN);
@@ -17,5 +17,9 @@ int main()
     //快速排序--降序
     quickSort(arr, 0, LEN - 1);
     printData(arr, LEN, "quick sort:");
+    //计数排序法
+    int out[LEN];
+    countSort(arr, out, LEN, 5);
+    printData(out, LEN, "count sort:");
     return 0;
 }

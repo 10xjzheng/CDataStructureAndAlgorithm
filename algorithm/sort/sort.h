@@ -16,6 +16,9 @@ int partition(int arr[], int start, int end);
 //冒泡排序
 void bubbleSort(int arr[], int length);
 
+//计数排序法
+void countSort(int arr[], int out[], int length, int range);
+
 //打印数组数据
 void printData(int *arr, int length, char *s);
 

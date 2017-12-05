@@ -129,3 +129,28 @@ void bubbleSort(int arr[], int length)
         }
     }
 }
+
+/**
+* 计数排序法
+* @parma int range 数值的最大值即范围
+**/
+void countSort(int arr[], int out[], int length, int range)
+{
+    int tmp[range], i;
+    //初始化
+    for (i = 0; i < range + 1; ++i)
+        tmp[i] = 0;
+    //计算数值出现的次数
+    for (i = 0; i < length; ++i)
+        tmp[arr[i]] = tmp[arr[i]] + 1;
+    //计算数字的下标
+    for (i = 1; i < range + 1; ++i){
+        tmp[i] = tmp[i] + tmp[i-1];
+    }
+    //排序结果
+    for(i = length - 1; i > -1; i--)
+    {
+        out[tmp[arr[i]] - 1] = arr[i]; //注意tmp[arr[i]] - 1必须-1，因为计算数字的下标的时候出来的是实际数组的下标+1
+        tmp[arr[i]] = tmp[arr[i]] - 1;
+    }
+}
