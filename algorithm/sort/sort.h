@@ -22,5 +22,7 @@ void countSort(int arr[], int out[], int length, int range);
 //打印数组数据
 void printData(int *arr, int length, char *s);
 
+//求最值
+int max(int arr[], int length);
 #endif //_SORT_H
 

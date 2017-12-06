@@ -154,3 +154,12 @@ void countSort(int arr[], int out[], int length, int range)
         tmp[arr[i]] = tmp[arr[i]] - 1;
     }
 }
+
+int max(int arr[], int length)
+{
+    int max = arr[0], i;
+    for (i = 1; i < length; ++i)
+        if(arr[i] > max) max = arr[i];
+    return max;
+}
+

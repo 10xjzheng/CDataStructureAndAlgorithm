@@ -19,7 +19,8 @@ int main()
     printData(arr, LEN, "quick sort:");
     //计数排序法
     int out[LEN];
-    countSort(arr, out, LEN, 5);
+    int maxValue = max(arr, LEN);
+    countSort(arr, out, LEN, maxValue);
     printData(out, LEN, "count sort:");
     return 0;
 }
