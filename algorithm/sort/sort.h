@@ -19,10 +19,16 @@ void bubbleSort(int arr[], int length);
 //计数排序法
 void countSort(int arr[], int out[], int length, int range);
 
+//基数排序法
+void radixSort(int arr[], int output[], int length);
+
+// 基数排序用到的计数排序法
+void radixCountSort(int arr[], int out[], int origin[], int length, int range);
+
 //打印数组数据
 void printData(int *arr, int length, char *s);
 
-//求最值
+//求最大值
 int max(int arr[], int length);
 #endif //_SORT_H
 

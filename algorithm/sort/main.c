@@ -3,7 +3,7 @@
 #define LEN 5
 int main()
 {
-    int arr[LEN] = {4,2,3,4,5};
+    int arr[LEN] = {124,342,311,34,295};
     printData(arr, LEN, "original array:");
     //冒泡排序--升序
     bubbleSort(arr, LEN);
@@ -22,5 +22,9 @@ int main()
     int maxValue = max(arr, LEN);
     countSort(arr, out, LEN, maxValue);
     printData(out, LEN, "count sort:");
+    //基数排序法
+    int out[LEN];
+    radixSort(arr, out, LEN);
+    printData(out, LEN, "radix sort:");
     return 0;
 }

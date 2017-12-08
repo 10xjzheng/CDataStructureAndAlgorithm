@@ -155,6 +155,7 @@ void countSort(int arr[], int out[], int length, int range)
     }
 }
 
+//求最大值
 int max(int arr[], int length)
 {
     int max = arr[0], i;
@@ -163,3 +164,53 @@ int max(int arr[], int length)
     return max;
 }
 
+//三位数的十进制基数排序法
+void radixSort(int arr[], int output[], int length)
+{
+    int tmp[length], i;
+    //个位
+    for(i = 0; i < length; ++i)
+        tmp[i] = arr[i]%10;
+    radixCountSort(tmp, output, arr, length, 10);
+    for(i = 0; i < length; ++i)
+        arr[i] = output[i];
+    //十位
+    for(i = 0; i < length; ++i)
+        tmp[i] = output[i]/10 % 10;
+    radixCountSort(tmp, output, arr, length, 10);
+    for(i = 0; i < length; ++i)
+        arr[i] = output[i];
+    //百位
+    for(i = 0; i < length; ++i)
+        tmp[i] = output[i]/100;
+    radixCountSort(tmp, output, arr, length, 10);
+}
+
+/**
+* 基数排序用到的计数排序法
+* @parma array arr 要排序的数组
+* @parma array out 输出
+* @parma array origin 原始数组
+* @parma array length 数组长度
+* @parma int range 数值的最大值即范围
+**/
+void radixCountSort(int arr[], int out[], int origin[], int length, int range)
+{
+    int tmp[range], i;
+    //初始化
+    for (i = 0; i < range + 1; ++i)
+        tmp[i] = 0;
+    //计算数值出现的次数
+    for (i = 0; i < length; ++i)
+        tmp[arr[i]] = tmp[arr[i]] + 1;
+    //计算数字的下标
+    for (i = 1; i < range + 1; ++i){
+        tmp[i] = tmp[i] + tmp[i-1];
+    }
+    //排序结果
+    for(i = length - 1; i > -1; i--)
+    {
+        out[tmp[arr[i]] - 1] = origin[i]; //注意tmp[arr[i]] - 1必须-1，因为计算数字的下标的时候出来的是实际数组的下标+1
+        tmp[arr[i]] = tmp[arr[i]] - 1;
+    }
+}
