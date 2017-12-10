@@ -24,14 +24,8 @@ Nodelist *search(char *key);
 //插入到哈希表
 Nodelist *put(char *key, char *value);
 
-//获取值
+//根据key获取值
 void get(char *key);
-
-//打印节点
-void printNode(Nodelist *np);
-
-//打印哈希表
-void print();
 
 #endif //_HASHTABLE_H
 

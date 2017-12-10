@@ -6,11 +6,13 @@
 unsigned hash(char *key)
 {
     unsigned hashVal;
+    char *tmp = key;
     for (hashVal = 0; *key != '\0'; key++)
     {
         hashVal = *key + 31 * hashVal;
     }
-    return hashVal % HASHSIZE;
+    hashVal = 2;
+    return hashVal;
 }
 
 //查询key
@@ -37,7 +39,18 @@ Nodelist *put(char *key, char *value)
             return NULL;
         np->next = NULL;
         hashVal = hash(key);
-        hashTable[hashVal] = np;
+        //如果不同key散列到同一个值，则用链表存起来
+        if(hashTable[hashVal] == NULL) {
+            hashTable[hashVal] = np;
+        }else {
+            Nodelist *npTmp = hashTable[hashVal], *preNp;
+            while(npTmp != NULL)
+            {
+                preNp = npTmp;
+                npTmp = npTmp->next;
+            }
+            preNp->next = np;
+        }
     } else{
         free((void*)np->value);
     }
@@ -46,35 +59,20 @@ Nodelist *put(char *key, char *value)
     return np;
 }
 
-//获取值
+//根据key获取值
 void get(char *key)
 {
     Nodelist *np;
     unsigned hashVal = hash(key);
     np =  (Nodelist *)hashTable[hashVal];
-    if(np == NULL)
-        printf("\n");
-    else 
-        printf("%s\n", np->value);
-}
-
-//打印节点
-void printNode(Nodelist *np)
-{
-    if(np != NULL)
+    while(np != NULL) 
     {
-        printf("key: %s value:%s\t", np->key, np->value);  
-        printNode(np->next); 
+        if(strcmp(key, np->key) == 0) {
+            printf("key:%s value:%s\n", key, np->value);
+            break;
+        } else {
+            np = np->next;
+        }
     }
-}
-
-//打印哈希表
-void print()
-{
-    int i = 0;
-    for (; i < HASHSIZE; ++i)
-    {
-        printNode(hashTable[i]);
-        printf("\n");
-    }    
+    if(np == NULL) printf("the key ");
 }
