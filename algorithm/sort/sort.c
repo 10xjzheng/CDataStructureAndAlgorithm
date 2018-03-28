@@ -132,7 +132,7 @@ void bubbleSort(int arr[], int length)
 
 /**
 * 计数排序法
-* @parma int range 数值的最大值即范围
+* @param int range 数值的最大值即范围
 **/
 void countSort(int arr[], int out[], int length, int range)
 {
@@ -188,11 +188,11 @@ void radixSort(int arr[], int output[], int length)
 
 /**
 * 基数排序用到的计数排序法
-* @parma array arr 要排序的数组
-* @parma array out 输出
-* @parma array origin 原始数组
-* @parma array length 数组长度
-* @parma int range 数值的最大值即范围
+* @param array arr 要排序的数组
+* @param array out 输出
+* @param array origin 原始数组
+* @param array length 数组长度
+* @param int range 数值的最大值即范围
 **/
 void radixCountSort(int arr[], int out[], int origin[], int length, int range)
 {
